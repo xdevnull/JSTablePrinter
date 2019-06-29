@@ -65,7 +65,7 @@ var TablePrinter = (function() {
      * 
      * @param {!Array.<!string>} headers 
      * @param {!Array.<!Array.<!string>>} rows 
-     * @return {!number}
+     * @return {!Array.<!number>}
      */
     function calculateWidthSize(headers, rows) {
         return headers.map((header, index) => {
@@ -80,7 +80,7 @@ var TablePrinter = (function() {
         /**
          * Print table
          * 
-         * @param {{headers: !Array.<!string>, rows: !Array.<!string>, maskChar: string|undefined, dividerChar: string|undefined}} opts 
+         * @param {{headers: !Array.<!string>, rows: !Array.<!Array.<!string>>, maskChar: (string|undefined), dividerChar: (string|undefined)}} opts 
          */
         print: function(opts) {
 
@@ -109,5 +109,4 @@ var TablePrinter = (function() {
             console.log(table.join("\n"));
         }
     };
-
 })();
