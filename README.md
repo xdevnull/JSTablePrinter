@@ -12,6 +12,8 @@ TablePrinter.print({
         ["2", "johndoe", "john@microsoft.com"],
         ["3", "systemCrash", "crash@error.com"]
     ],
+    onOutput: (table) => console.log(table),
+    dividerBetweenRows: false, //Print divider between each row
     maskChar: "+", //Defaults to "+"
     dividerChar: "-", //Defaults to  "-"
 });

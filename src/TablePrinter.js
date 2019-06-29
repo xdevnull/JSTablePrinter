@@ -1,20 +1,24 @@
 /**
+ * TablePrinterOptions
+ * 
+ * @typedef {{
+ *  headers: !Array.<!string>,
+ *  rows: !Array.<!Array.<!string>>,
+ *  onOutput: function(string):void,
+ *  maskChar: (string|undefined),
+ *  dividerChar: (string|undefined),
+ *  dividerBetweenRows: (boolean|undefined)
+ * }}
+ */
+var TablePrinterOptions;
+
+/**
  * TablePrinter
  * 
  * @author xdevnull
  * @license MIT
  */
 var TablePrinter = (function() {
-
-    /**
-     * Add space for row values
-     * 
-     * @param {!Array.<!string>} row
-     * @return {!Array.<!string>} 
-     */
-    function addSpaceForRowValues(row) {
-        return row.map(val => ("   " + val + "   "));
-    }
 
     /**
      * Join String
@@ -70,15 +74,15 @@ var TablePrinter = (function() {
         /**
          * Print table
          * 
-         * @param {{headers: !Array.<!string>, rows: !Array.<!Array.<!string>>, maskChar: (string|undefined), dividerChar: (string|undefined)}} opts 
+         * @param {!TablePrinterOptions} opts 
          */
         print: function(opts) {
 
             //Defaults
             opts.maskChar = opts.maskChar || "+";
             opts.dividerChar = opts.dividerChar || "-";
-            opts.headers = addSpaceForRowValues(opts.headers);
-            opts.rows = opts.rows.map(row => addSpaceForRowValues(row));
+            opts.headers = opts.headers.map(val => ("   " + val + "   "));
+            opts.rows = opts.rows.map(row => row.map(val => ("   " + val + "   ")));
 
             //Calculate Sizes
             const colWidths = calculateWidthSize(opts.headers, opts.rows);
@@ -91,12 +95,19 @@ var TablePrinter = (function() {
             let table = [divider, replacePrintMask(colWidths, ...opts.headers), divider];
 
             //Append rows for table
-            opts.rows.forEach(row => table.push(replacePrintMask(colWidths, ...row)));
+            opts.rows.forEach((row, index) => {
+                table.push(replacePrintMask(colWidths, ...row));
+                if(opts.dividerBetweenRows && index + 1 < opts.rows.length) {
+                    table.push(divider);
+                }
+            });
+
 
             //Append divider
             table.push(divider);
 
-            console.log(table.join("\n"));
+            //Print
+            opts.onOutput(table.join("\n"));
         }
     };
 })();
