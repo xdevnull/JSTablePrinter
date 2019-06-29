@@ -23,15 +23,9 @@ var TablePrinter = (function() {
      * @param {!Array.<!string>} strArr 
      */
     function str_join(seperator, strArr) {
-        let result = "";
-        strArr.forEach((val, index) => {
-            if(index !== 0) {
-                result += seperator;
-            }
-            result += val;
-        });
-        return result;
+        return strArr.map((val, index) => (index !== 0 ? (seperator + val) : val)).join("");
     }
+
 
     /**
      * Create Table Divider
@@ -42,11 +36,7 @@ var TablePrinter = (function() {
      * @return {!string} 
      */
     function createDivier(colWidths, dividerChar, maskChar) {
-        let sections = [];
-        colWidths.forEach(width => {
-            sections.push(dividerChar.repeat(width));
-        });
-        return maskChar + str_join(maskChar, sections) + maskChar;
+        return maskChar + str_join(maskChar, colWidths.map(width => dividerChar.repeat(width))) + maskChar;
     }
 
     /**
