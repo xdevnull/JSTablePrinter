@@ -80,13 +80,13 @@ var TablePrinter = (function() {
         /**
          * Print table
          * 
-         * @param {{headers: !Array.<!string>, rows: !Array.<!string>, maskChar: string|undefined, divider: string|undefined}} opts 
+         * @param {{headers: !Array.<!string>, rows: !Array.<!string>, maskChar: string|undefined, dividerChar: string|undefined}} opts 
          */
         print: function(opts) {
 
             //Defaults
             opts.maskChar = opts.maskChar || "+";
-            opts.divider = opts.divider || "-";
+            opts.dividerChar = opts.dividerChar || "-";
             opts.headers = addSpaceForRowValues(opts.headers);
             opts.rows = opts.rows.map(row => addSpaceForRowValues(row));
 
@@ -94,7 +94,7 @@ var TablePrinter = (function() {
             const colWidths = calculateWidthSize(opts.headers, opts.rows);
 
             //Divier, Print Mask
-            const divider = createDivier(colWidths, opts.divider, opts.maskChar);
+            const divider = createDivier(colWidths, opts.dividerChar, opts.maskChar);
 
             //Create table to be printed
             //Append divider, header
