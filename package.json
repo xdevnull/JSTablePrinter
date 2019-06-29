@@ -1,0 +1,20 @@
+{
+  "name": "JSTablePrinter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xdevnull/JSTablePrinter.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xdevnull/JSTablePrinter/issues"
+  },
+  "homepage": "https://github.com/xdevnull/JSTablePrinter#readme"
+}
